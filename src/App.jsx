@@ -5,7 +5,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './pages/Home';
 import Dashboard from './components/Dashboard';
-import Calculator from './components/Calculator';
+import Calculator from './components/Calc';
 import Tips from './components/Tips';
 import History from './components/History';
 import Profile from './pages/Profile';
