@@ -25,54 +25,31 @@ function Tips() {
 
     if (tips.length === 0) {
         return (
-            <div style={{ textAlign: 'center', padding: '48px 0', background: 'white', borderRadius: '12px', padding: '32px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                <div style={{ fontSize: '60px', marginBottom: '16px' }}>💡</div>
-                <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>No Tips Available</h3>
-                <p style={{ color: '#6b7280' }}>Complete a footprint calculation to get personalized tips.</p>
+            <div className="card" style={{ textAlign: 'center', padding: '56px 40px' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>💡</div>
+                <h3 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '8px', color: '#1e1e2a' }}>No tips available</h3>
+                <p style={{ color: '#6b6258' }}>Complete a footprint calculation to get personalized tips.</p>
             </div>
         );
     }
 
-    const gridStyle = {
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '24px'
-    };
-
-    const tipCardStyle = {
-        background: 'white',
-        borderRadius: '12px',
-        padding: '24px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        transition: 'box-shadow 0.3s'
-    };
-
     return (
-        <div>
-            <h2 style={{ fontSize: '30px', fontWeight: 'bold', color: '#15803d', textAlign: 'center', marginBottom: '24px' }}>
-                Personalized Climate Tips 💡
-            </h2>
-            <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '32px' }}>
-                Based on your lifestyle, here are ways to reduce your carbon footprint.
-            </p>
-
-            <div style={gridStyle}>
+        <>
+            <div className="tip-grid">
                 {tips.map((tip) => (
-                    <div key={tip.id} style={tipCardStyle}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                            <div style={{ fontSize: '32px', marginRight: '16px' }}>{tip.icon || '💡'}</div>
+                    <div key={tip.id} className="tip-card">
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                             <div>
-                                <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>{tip.title}</h3>
-                                <p style={{ color: '#6b7280', marginBottom: '8px' }}>{tip.description}</p>
-                                <span style={{ color: '#15803d', fontWeight: 'bold' }}>
-                                    🌱 Saves {tip.co2_saved} kg CO₂/year
-                                </span>
+                                <h3>{tip.title}</h3>
+                                <p>{tip.description}</p>
+                                <span className="saved">🌱 Saves {tip.co2_saved} kg CO₂ per year</span>
                             </div>
+                            <span className="badge">{tip.category}</span>
                         </div>
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 

@@ -22,7 +22,6 @@ function History() {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
-            weekday: 'short',
             year: 'numeric',
             month: 'short',
             day: 'numeric',
@@ -37,10 +36,10 @@ function History() {
 
     if (history.length === 0) {
         return (
-            <div style={{ textAlign: 'center', padding: '48px 0', background: 'white', borderRadius: '12px', padding: '32px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                <div style={{ fontSize: '60px', marginBottom: '16px' }}>📜</div>
-                <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>No History Yet</h3>
-                <p style={{ color: '#6b7280' }}>Calculate your first carbon footprint to start tracking your progress.</p>
+            <div className="card" style={{ textAlign: 'center', padding: '56px 40px' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>📜</div>
+                <h3 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '8px', color: '#1e1e2a' }}>No history yet</h3>
+                <p style={{ color: '#6b6258' }}>Calculate your first carbon footprint to start tracking.</p>
             </div>
         );
     }
@@ -52,58 +51,47 @@ function History() {
     const total = history.reduce((sum, i) => sum + i.total_kg, 0);
 
     return (
-        <div>
-            <h2 style={{ fontSize: '30px', fontWeight: 'bold', color: '#15803d', textAlign: 'center', marginBottom: '24px' }}>
-                Your Calculation History 📜
-            </h2>
-
-            <div style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead style={{ backgroundColor: '#f0fdf4' }}>
-                            <tr>
-                                <th style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 'bold', color: '#374151' }}>Date</th>
-                                <th style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 'bold', color: '#374151' }}>Transport</th>
-                                <th style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 'bold', color: '#374151' }}>Food</th>
-                                <th style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 'bold', color: '#374151' }}>Home</th>
-                                <th style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 'bold', color: '#374151' }}>Shopping</th>
-                                <th style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 'bold', color: '#15803d' }}>Total</th>
+        <>
+            <div className="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transport</th>
+                            <th>Food</th>
+                            <th>Home</th>
+                            <th>Shopping</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {history.map((item) => (
+                            <tr key={item.id}>
+                                <td>{formatDate(item.date_calculated)}</td>
+                                <td>{item.transport_kg}</td>
+                                <td>{item.food_kg}</td>
+                                <td>{item.home_kg}</td>
+                                <td>{item.shopping_kg}</td>
+                                <td style={{ fontWeight: 600, color: '#2d6a4f' }}>{item.total_kg} kg</td>
                             </tr>
-                        </thead>
-                        <tbody style={{ divideY: '1px solid #e5e7eb' }}>
-                            {history.map((item) => (
-                                <tr key={item.id} style={{ transition: 'background-color 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f9fafb'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                    <td style={{ padding: '12px 24px', fontSize: '14px', color: '#6b7280' }}>
-                                        {formatDate(item.date_calculated)}
-                                    </td>
-                                    <td style={{ padding: '12px 24px', fontSize: '14px' }}>{item.transport_kg}</td>
-                                    <td style={{ padding: '12px 24px', fontSize: '14px' }}>{item.food_kg}</td>
-                                    <td style={{ padding: '12px 24px', fontSize: '14px' }}>{item.home_kg}</td>
-                                    <td style={{ padding: '12px 24px', fontSize: '14px' }}>{item.shopping_kg}</td>
-                                    <td style={{ padding: '12px 24px', fontSize: '14px', fontWeight: 'bold', color: '#15803d' }}>
-                                        {item.total_kg} kg
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                        <tfoot style={{ backgroundColor: '#f0fdf4', fontWeight: 'bold' }}>
-                            <tr>
-                                <td style={{ padding: '12px 24px', fontSize: '14px' }}>Total</td>
-                                <td style={{ padding: '12px 24px', fontSize: '14px' }}>{totalTransport.toFixed(0)}</td>
-                                <td style={{ padding: '12px 24px', fontSize: '14px' }}>{totalFood.toFixed(0)}</td>
-                                <td style={{ padding: '12px 24px', fontSize: '14px' }}>{totalHome.toFixed(0)}</td>
-                                <td style={{ padding: '12px 24px', fontSize: '14px' }}>{totalShopping.toFixed(0)}</td>
-                                <td style={{ padding: '12px 24px', fontSize: '14px', color: '#15803d' }}>{total.toFixed(0)} kg</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                        ))}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td>{totalTransport.toFixed(0)}</td>
+                            <td>{totalFood.toFixed(0)}</td>
+                            <td>{totalHome.toFixed(0)}</td>
+                            <td>{totalShopping.toFixed(0)}</td>
+                            <td style={{ color: '#2d6a4f', fontWeight: 700 }}>{total.toFixed(0)} kg</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
-
-            <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '14px', color: '#6b7280' }}>
-                Showing {history.length} calculations
-            </div>
-        </div>
+            <p style={{ textAlign: 'center', marginTop: '16px', color: '#b5aaa0', fontSize: '14px' }}>
+                {history.length} calculations
+            </p>
+        </>
     );
 }
 

@@ -9,76 +9,33 @@ function Navbar({ isAuthenticated, onLogout }) {
         navigate('/');
     };
 
-    const navStyle = {
-        backgroundColor: '#15803d',
-        color: 'white',
-        padding: '16px 0',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-    };
-
-    const containerStyle = {
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 20px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    };
-
-    const logoStyle = {
-        fontSize: '24px',
-        fontWeight: 'bold',
-        textDecoration: 'none',
-        color: 'white'
-    };
-
-    const linksStyle = {
-        display: 'flex',
-        gap: '20px',
-        alignItems: 'center'
-    };
-
-    const linkStyle = {
-        color: 'white',
-        textDecoration: 'none',
-        transition: 'color 0.3s'
-    };
-
-    const logoutBtnStyle = {
-        backgroundColor: '#dc2626',
-        color: 'white',
-        border: 'none',
-        padding: '6px 16px',
-        borderRadius: '4px',
-        cursor: 'pointer'
-    };
-
     return (
-        <nav style={navStyle}>
-            <div style={containerStyle}>
-                <Link to="/" style={logoStyle}>🌍 Climate Tracker</Link>
-                
-                <div style={linksStyle}>
+        <nav className="navbar">
+            <div className="container">
+                <Link to="/" className="logo">Carbon<span>Tracker</span></Link>
+
+                <div className="nav-links">
                     {isAuthenticated ? (
                         <>
-                            <Link to="/dashboard" style={linkStyle}>Dashboard</Link>
-                            <Link to="/calculator" style={linkStyle}>Calculate</Link>
-                            <Link to="/tips" style={linkStyle}>Tips</Link>
-                            <Link to="/history" style={linkStyle}>History</Link>
-                            <Link to="/profile" style={linkStyle}>Profile</Link>
-                            <button onClick={handleLogout} style={logoutBtnStyle}>
-                                Logout
-                            </button>
+                            <Link to="/dashboard">Dashboard</Link>
+                            <Link to="/calculator">Calculate</Link>
+                            <Link to="/tips">Tips</Link>
+                            <Link to="/history">History</Link>
+                            <Link to="/challenges">Challenges</Link>
+                            <Link to="/badges">Badges</Link>
+                            <Link to="/action-plan">Action Plan</Link>
+                            <Link to="/points">Points</Link>
+                            <Link to="/progress">Progress</Link>
+                            <Link to="/teams">Teams</Link>
+                            <Link to="/community">Community</Link>
+                            <Link to="/recommendations">AI Tips</Link>
+                            <Link to="/profile">Profile</Link>
+                            <button onClick={handleLogout} className="btn-danger">Logout</button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" style={linkStyle}>Login</Link>
-                            <Link to="/register" style={{
-                                ...linkStyle,
-                                backgroundColor: '#16a34a',
-                                padding: '6px 16px',
-                                borderRadius: '4px'
-                            }}>Sign Up</Link>
+                            <Link to="/login">Login</Link>
+                            <Link to="/register" className="signup-btn">Sign Up</Link>
                         </>
                     )}
                 </div>

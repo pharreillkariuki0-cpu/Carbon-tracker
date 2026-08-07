@@ -9,6 +9,14 @@ import Calculator from './components/Calc';
 import Tips from './components/Tips';
 import History from './components/History';
 import Profile from './pages/Profile';
+import Challenges from './components/Challenges';
+import Badges from './components/Badges';
+import ActionPlan from './components/ActionPlan';
+import Points from './components/Points';
+import ProgressReport from './components/ProgressReport';
+import Teams from './components/Teams';
+import CommunityPosts from './components/CommunityPosts';
+import Recommendations from './components/Recommendations';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,17 +40,17 @@ function App() {
 
     if (loading) {
         return (
-            <div className="loading" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ fontSize: '20px', color: '#15803d' }}>Loading...</div>
+            <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="loading">Loading...</div>
             </div>
         );
     }
 
     return (
         <Router>
-            <div style={{ minHeight: '100vh', backgroundColor: '#f0fdf4' }}>
+            <div style={{ minHeight: '100vh', backgroundColor: '#fbf9f6' }}>
                 <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-                <div className="container" style={{ padding: '32px 20px' }}>
+                <div className="container" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
                     <Routes>
                         <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
                         <Route path="/login" element={
@@ -65,6 +73,30 @@ function App() {
                         } />
                         <Route path="/profile" element={
                             isAuthenticated ? <Profile /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/challenges" element={
+                            isAuthenticated ? <Challenges /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/badges" element={
+                            isAuthenticated ? <Badges /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/action-plan" element={
+                            isAuthenticated ? <ActionPlan /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/points" element={
+                            isAuthenticated ? <Points /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/progress" element={
+                            isAuthenticated ? <ProgressReport /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/teams" element={
+                            isAuthenticated ? <Teams /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/community" element={
+                            isAuthenticated ? <CommunityPosts /> : <Navigate to="/login" />
+                        } />
+                        <Route path="/recommendations" element={
+                            isAuthenticated ? <Recommendations /> : <Navigate to="/login" />
                         } />
                     </Routes>
                 </div>

@@ -44,101 +44,58 @@ function Register({ onRegister }) {
         }
     };
 
-    const containerStyle = {
-        maxWidth: '480px',
-        margin: '0 auto',
-        background: 'white',
-        borderRadius: '12px',
-        padding: '32px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-    };
-
     return (
-        <div style={containerStyle}>
-            <h2 style={{ textAlign: 'center', color: '#15803d', fontSize: '24px', marginBottom: '24px' }}>
-                Join the Climate Action! 🌱
-            </h2>
-            
-            {error && (
-                <div style={{
-                    backgroundColor: '#fee2e2',
-                    border: '1px solid #fca5a5',
-                    color: '#b91c1c',
-                    padding: '8px 16px',
-                    borderRadius: '8px',
-                    marginBottom: '16px'
-                }}>
-                    {error}
-                </div>
-            )}
+        <div className="form-container">
+            <h2>Create <span>account</span></h2>
+
+            {error && <div className="error-message">{error}</div>}
 
             <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '16px' }}>
-                    <label style={{ display: 'block', fontWeight: '500', marginBottom: '4px' }}>Username</label>
+                <div className="form-group">
+                    <label>Username</label>
                     <input
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '10px 16px',
-                            border: '1px solid #d1d5db',
-                            borderRadius: '8px',
-                            fontSize: '16px'
-                        }}
+                        className="input-field"
+                        placeholder="Choose a username"
                         required
                     />
                 </div>
 
-                <div style={{ marginBottom: '16px' }}>
-                    <label style={{ display: 'block', fontWeight: '500', marginBottom: '4px' }}>Email</label>
+                <div className="form-group">
+                    <label>Email</label>
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '10px 16px',
-                            border: '1px solid #d1d5db',
-                            borderRadius: '8px',
-                            fontSize: '16px'
-                        }}
+                        className="input-field"
+                        placeholder="Enter your email"
                         required
                     />
                 </div>
 
-                <div style={{ marginBottom: '16px' }}>
-                    <label style={{ display: 'block', fontWeight: '500', marginBottom: '4px' }}>Password</label>
+                <div className="form-group">
+                    <label>Password</label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '10px 16px',
-                            border: '1px solid #d1d5db',
-                            borderRadius: '8px',
-                            fontSize: '16px'
-                        }}
+                        className="input-field"
+                        placeholder="Minimum 6 characters"
                         required
                         minLength="6"
                     />
-                    <p style={{ fontSize: '12px', color: '#6b7280', marginTop: '4px' }}>Minimum 6 characters</p>
                 </div>
 
-                <div style={{ marginBottom: '24px' }}>
-                    <label style={{ display: 'block', fontWeight: '500', marginBottom: '4px' }}>Confirm Password</label>
+                <div className="form-group">
+                    <label>Confirm Password</label>
                     <input
                         type="password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '10px 16px',
-                            border: '1px solid #d1d5db',
-                            borderRadius: '8px',
-                            fontSize: '16px'
-                        }}
+                        className="input-field"
+                        placeholder="Confirm your password"
                         required
                     />
                 </div>
@@ -146,25 +103,14 @@ function Register({ onRegister }) {
                 <button
                     type="submit"
                     disabled={loading}
-                    style={{
-                        width: '100%',
-                        backgroundColor: '#15803d',
-                        color: 'white',
-                        padding: '12px 24px',
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                        opacity: loading ? 0.5 : 1
-                    }}
+                    className="btn-primary btn-block"
                 >
-                    {loading ? 'Creating Account...' : 'Create Account'}
+                    {loading ? 'Creating account...' : 'Create account'}
                 </button>
             </form>
 
-            <p style={{ textAlign: 'center', marginTop: '16px', color: '#6b7280' }}>
-                Already have an account? <Link to="/login" style={{ color: '#15803d' }}>Login</Link>
+            <p style={{ textAlign: 'center', marginTop: '18px', color: '#6b6258', fontSize: '14px' }}>
+                Already have an account? <Link to="/login" style={{ color: '#2d6a4f', fontWeight: 600 }}>Sign in</Link>
             </p>
         </div>
     );

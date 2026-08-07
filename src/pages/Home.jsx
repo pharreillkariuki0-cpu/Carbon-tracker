@@ -2,109 +2,60 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Home({ isAuthenticated }) {
-    const heroStyle = {
-        background: 'linear-gradient(135deg, #15803d, #064e3b)',
-        color: 'white',
-        padding: '60px 40px',
-        borderRadius: '16px',
-        textAlign: 'center',
-        marginBottom: '32px'
-    };
-
-    const gridStyle = {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '24px',
-        marginTop: '32px'
-    };
-
-    const cardStyle = {
-        background: 'white',
-        borderRadius: '12px',
-        padding: '24px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        textAlign: 'center'
-    };
-
-    const whyStyle = {
-        background: 'white',
-        borderRadius: '12px',
-        padding: '24px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        marginTop: '32px',
-        textAlign: 'center'
-    };
-
     return (
-        <div>
-            <div style={heroStyle}>
-                <h1 style={{ fontSize: '48px', marginBottom: '16px' }}>
-                    🌍 Track Your Carbon Footprint
-                </h1>
-                <p style={{ fontSize: '20px', marginBottom: '24px' }}>
-                    Understand your impact on the planet and take action to reduce it.
+        <>
+            <section className="hero">
+                <h1>Track your <span>carbon footprint</span></h1>
+                <p>
+                    Understand your impact on the planet and take meaningful action.
+                    Simple questions, clear insights, and practical steps.
                 </p>
-                {isAuthenticated ? (
-                    <Link to="/calculator">
-                        <button style={{
-                            backgroundColor: 'white',
-                            color: '#15803d',
-                            padding: '12px 32px',
-                            border: 'none',
-                            borderRadius: '9999px',
-                            fontSize: '18px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer'
-                        }}>
-                            Calculate Now →
-                        </button>
-                    </Link>
-                ) : (
-                    <Link to="/register">
-                        <button style={{
-                            backgroundColor: 'white',
-                            color: '#15803d',
-                            padding: '12px 32px',
-                            border: 'none',
-                            borderRadius: '9999px',
-                            fontSize: '18px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer'
-                        }}>
-                            Get Started →
-                        </button>
-                    </Link>
-                )}
-            </div>
+                <div className="btn-group">
+                    {isAuthenticated ? (
+                        <Link to="/calculator">
+                            <button className="btn-primary">Calculate Now</button>
+                        </Link>
+                    ) : (
+                        <>
+                            <Link to="/register">
+                                <button className="btn-primary">Get Started</button>
+                            </Link>
+                            <Link to="/login">
+                                <button className="btn-secondary">Sign In</button>
+                            </Link>
+                        </>
+                    )}
+                </div>
+            </section>
 
-            <div style={gridStyle}>
-                <div style={cardStyle}>
-                    <div style={{ fontSize: '40px', marginBottom: '12px' }}>📊</div>
-                    <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '8px' }}>Calculate Your Impact</h3>
-                    <p style={{ color: '#6b7280' }}>Answer simple questions about your lifestyle to see your carbon footprint.</p>
+            <div className="features">
+                <div className="feature-card">
+                    <div className="icon">📊</div>
+                    <h3>Calculate Your Impact</h3>
+                    <p>Answer a few simple questions about your lifestyle and see your carbon footprint instantly.</p>
                 </div>
 
-                <div style={cardStyle}>
-                    <div style={{ fontSize: '40px', marginBottom: '12px' }}>💡</div>
-                    <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '8px' }}>Get Personalized Tips</h3>
-                    <p style={{ color: '#6b7280' }}>Receive actionable suggestions to reduce your footprint based on your habits.</p>
+                <div className="feature-card">
+                    <div className="icon">💡</div>
+                    <h3>Get Personalized Insights</h3>
+                    <p>Receive actionable tips tailored to your habits to help you reduce your carbon footprint.</p>
                 </div>
 
-                <div style={cardStyle}>
-                    <div style={{ fontSize: '40px', marginBottom: '12px' }}>📈</div>
-                    <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '8px' }}>Track Your Progress</h3>
-                    <p style={{ color: '#6b7280' }}>See how your footprint changes over time and celebrate your improvements.</p>
+                <div className="feature-card">
+                    <div className="icon">📈</div>
+                    <h3>Track Your Progress</h3>
+                    <p>Monitor your improvements over time and see how small changes add up to make a difference.</p>
                 </div>
             </div>
 
-            <div style={whyStyle}>
-                <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '12px' }}>🌱 Why It Matters</h3>
-                <p style={{ color: '#6b7280' }}>
-                    The average person produces about <strong style={{ color: '#15803d' }}>4-5 tonnes of CO₂ per year</strong>.
-                    Small changes can make a big difference. Join thousands of people tracking their climate impact!
+            <div className="card" style={{ textAlign: 'center' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1e1e2a', marginBottom: '8px' }}>Why it matters</h3>
+                <p style={{ color: '#6b6258', fontSize: '16px', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7 }}>
+                    The average person produces about <strong style={{ color: '#2d6a4f' }}>4–5 tonnes of CO₂ per year</strong>.
+                    Small changes in your daily habits can make a significant difference for the planet.
                 </p>
             </div>
-        </div>
+        </>
     );
 }
 

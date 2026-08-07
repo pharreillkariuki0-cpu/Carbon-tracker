@@ -37,25 +37,14 @@ function Dashboard() {
 
     if (!stats || stats.total_calculations === 0) {
         return (
-            <div style={{ textAlign: 'center', padding: '48px 0', background: 'white', borderRadius: '12px', padding: '32px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                <div style={{ fontSize: '60px', marginBottom: '16px' }}>📊</div>
-                <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '12px' }}>No Data Yet</h3>
-                <p style={{ color: '#6b7280', marginBottom: '16px' }}>
+            <div className="card" style={{ textAlign: 'center', padding: '56px 40px' }}>
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>📊</div>
+                <h3 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '8px', color: '#1e1e2a' }}>No data yet</h3>
+                <p style={{ color: '#6b6258', marginBottom: '20px' }}>
                     Calculate your first carbon footprint to see your dashboard.
                 </p>
                 <Link to="/calculator">
-                    <button style={{
-                        backgroundColor: '#15803d',
-                        color: 'white',
-                        padding: '12px 24px',
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        cursor: 'pointer'
-                    }}>
-                        Calculate Now →
-                    </button>
+                    <button className="btn-primary">Calculate Now</button>
                 </Link>
             </div>
         );
@@ -70,128 +59,84 @@ function Dashboard() {
                 latestFootprint.home_kg,
                 latestFootprint.shopping_kg
             ],
-            backgroundColor: ['#3b82f6', '#22c55e', '#eab308', '#8b5cf6'],
-            borderWidth: 2,
+            backgroundColor: ['#2d6a4f', '#409f7a', '#7ec4a8', '#b8d9cc'],
+            borderWidth: 0,
         }]
     } : null;
 
-    const statsGridStyle = {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '16px',
-        marginBottom: '32px'
-    };
-
-    const statCardStyle = {
-        background: 'white',
-        borderRadius: '12px',
-        padding: '24px',
-        textAlign: 'center',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-    };
-
-    const grid2Style = {
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '24px'
-    };
-
     return (
-        <div>
-            <h2 style={{ fontSize: '30px', fontWeight: 'bold', color: '#15803d', marginBottom: '24px' }}>Your Climate Dashboard</h2>
-
-            <div style={statsGridStyle}>
-                <div style={statCardStyle}>
-                    <p style={{ fontSize: '14px', color: '#6b7280' }}>Latest Footprint</p>
-                    <p style={{ fontSize: '28px', fontWeight: 'bold', color: '#15803d' }}>{stats.latest_total} kg</p>
-                    <p style={{ fontSize: '12px', color: '#9ca3af' }}>CO₂ per year</p>
-                </div>
-                <div style={statCardStyle}>
-                    <p style={{ fontSize: '14px', color: '#6b7280' }}>Average</p>
-                    <p style={{ fontSize: '28px', fontWeight: 'bold', color: '#2563eb' }}>{stats.average_total} kg</p>
-                    <p style={{ fontSize: '12px', color: '#9ca3af' }}>CO₂ per year</p>
-                </div>
-                <div style={statCardStyle}>
-                    <p style={{ fontSize: '14px', color: '#6b7280' }}>Calculations</p>
-                    <p style={{ fontSize: '28px', fontWeight: 'bold', color: '#8b5cf6' }}>{stats.total_calculations}</p>
-                    <p style={{ fontSize: '12px', color: '#9ca3af' }}>Total entries</p>
-                </div>
-                <div style={statCardStyle}>
-                    <p style={{ fontSize: '14px', color: '#6b7280' }}>Improvement</p>
-                    <p style={{ fontSize: '28px', fontWeight: 'bold', color: stats.improvement > 0 ? '#15803d' : '#dc2626' }}>
-                        {stats.improvement > 0 ? `-${stats.improvement}` : stats.improvement} kg
-                    </p>
-                    <p style={{ fontSize: '12px', color: '#9ca3af' }}>First → Latest</p>
+        <>
+            <div className="stats-section">
+                <div className="stats-grid">
+                    <div className="stat-card">
+                        <p className="label">Latest Footprint</p>
+                        <p className="number">{stats.latest_total} <span style={{ fontSize: '16px', fontWeight: 400, color: '#6b6258' }}>kg</span></p>
+                        <p className="sub">CO₂ per year</p>
+                    </div>
+                    <div className="stat-card">
+                        <p className="label">Average</p>
+                        <p className="number">{stats.average_total} <span style={{ fontSize: '16px', fontWeight: 400, color: '#6b6258' }}>kg</span></p>
+                        <p className="sub">CO₂ per year</p>
+                    </div>
+                    <div className="stat-card">
+                        <p className="label">Calculations</p>
+                        <p className="number">{stats.total_calculations}</p>
+                        <p className="sub">Total entries</p>
+                    </div>
+                    <div className="stat-card">
+                        <p className="label">Improvement</p>
+                        <p className="number" style={{ color: stats.improvement > 0 ? '#2d6a4f' : '#e76f51' }}>
+                            {stats.improvement > 0 ? `-${stats.improvement}` : stats.improvement} <span style={{ fontSize: '16px', fontWeight: 400, color: '#6b6258' }}>kg</span>
+                        </p>
+                        <p className="sub">First → Latest</p>
+                    </div>
                 </div>
             </div>
 
-            <div style={grid2Style}>
-                <div style={{ background: 'white', borderRadius: '12px', padding: '24px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                    <h4 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>Breakdown by Category</h4>
-                    <div style={{ maxWidth: '300px', margin: '0 auto' }}>
+            <div className="grid-2">
+                <div className="card">
+                    <h4 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px', color: '#1e1e2a' }}>Breakdown by category</h4>
+                    <div style={{ maxWidth: '280px', margin: '0 auto' }}>
                         {pieData && <Doughnut data={pieData} />}
                     </div>
                 </div>
 
-                <div style={{ background: 'white', borderRadius: '12px', padding: '24px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                    <h4 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px' }}>Quick Stats</h4>
+                <div className="card">
+                    <h4 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px', color: '#1e1e2a' }}>Your breakdown</h4>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>
-                            <span style={{ color: '#6b7280' }}>🚗 Transport</span>
-                            <span style={{ fontWeight: 'bold' }}>{latestFootprint?.transport_kg || 0} kg</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f0ebe3', paddingBottom: '10px' }}>
+                            <span style={{ color: '#6b6258' }}>Transport</span>
+                            <span style={{ fontWeight: 600 }}>{latestFootprint?.transport_kg || 0} kg</span>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>
-                            <span style={{ color: '#6b7280' }}>🍔 Food</span>
-                            <span style={{ fontWeight: 'bold' }}>{latestFootprint?.food_kg || 0} kg</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f0ebe3', paddingBottom: '10px' }}>
+                            <span style={{ color: '#6b6258' }}>Food</span>
+                            <span style={{ fontWeight: 600 }}>{latestFootprint?.food_kg || 0} kg</span>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>
-                            <span style={{ color: '#6b7280' }}>🏠 Home</span>
-                            <span style={{ fontWeight: 'bold' }}>{latestFootprint?.home_kg || 0} kg</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f0ebe3', paddingBottom: '10px' }}>
+                            <span style={{ color: '#6b6258' }}>Home</span>
+                            <span style={{ fontWeight: 600 }}>{latestFootprint?.home_kg || 0} kg</span>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>
-                            <span style={{ color: '#6b7280' }}>🛍️ Shopping</span>
-                            <span style={{ fontWeight: 'bold' }}>{latestFootprint?.shopping_kg || 0} kg</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f0ebe3', paddingBottom: '10px' }}>
+                            <span style={{ color: '#6b6258' }}>Shopping</span>
+                            <span style={{ fontWeight: 600 }}>{latestFootprint?.shopping_kg || 0} kg</span>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '8px' }}>
-                            <span style={{ fontWeight: 'bold', color: '#15803d' }}>Total</span>
-                            <span style={{ fontSize: '24px', fontWeight: 'bold', color: '#15803d' }}>{latestFootprint?.total_kg || 0} kg</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '4px' }}>
+                            <span style={{ fontWeight: 700, color: '#1e1e2a' }}>Total</span>
+                            <span style={{ fontSize: '22px', fontWeight: 700, color: '#2d6a4f' }}>{latestFootprint?.total_kg || 0} kg</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: '24px' }}>
+            <div style={{ textAlign: 'center', marginTop: '32px' }}>
                 <Link to="/calculator">
-                    <button style={{
-                        backgroundColor: '#15803d',
-                        color: 'white',
-                        padding: '12px 24px',
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                        marginRight: '12px'
-                    }}>
-                        Recalculate
-                    </button>
+                    <button className="btn-primary" style={{ marginRight: '14px' }}>Recalculate</button>
                 </Link>
                 <Link to="/tips">
-                    <button style={{
-                        backgroundColor: '#2563eb',
-                        color: 'white',
-                        padding: '12px 24px',
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                        cursor: 'pointer'
-                    }}>
-                        View Tips
-                    </button>
+                    <button className="btn-secondary">View Tips</button>
                 </Link>
             </div>
-        </div>
+        </>
     );
 }
 
